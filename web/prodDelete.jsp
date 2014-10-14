@@ -3,7 +3,7 @@
     
 <h1>Are you sure you want to delete this product?</h1>
 
-<table class="noBorder">
+<table class="noBorder noPad">
   <tr>
     <td><label>Code:</label></td>
     <td><c:out value="${product.code}" /></td>
@@ -18,16 +18,16 @@
   </tr>
 </table>
 
-<table class="noBorder">
+<table>
   <tr>
     <td>
-      <form action="" method="post">
+      <form action="productMaint" method="post">
         <input type="hidden" name="action" value="deleteConfirmed">
         <input type="submit" value="Yes">
       </form>
     </td>
     <td>
-      <form action="" method="post">
+      <form action="productMaint" method="post">
         <input type="hidden" name="action" value="displayProducts">
         <input type="submit" value="No">
       </form>

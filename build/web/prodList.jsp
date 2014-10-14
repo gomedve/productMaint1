@@ -2,7 +2,7 @@
 <%@ include file="/includes/header.html" %>
     
 <h1>Products</h1>
-<table>
+<table class="border">
   <tr>
     <th>Code</th>
     <th>Description</th>
@@ -30,7 +30,7 @@
   </c:choose>
 </table><br />
     
-<form action="" method="post">
+<form action="productMaint" method="post">
   <input type="hidden" name="action" value="addProduct" />
   <input type="submit" value="Add Product" />
 </form>

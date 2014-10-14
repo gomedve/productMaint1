@@ -1,7 +1,6 @@
 package music.servlet;
 
 import java.io.*;
-import java.text.NumberFormat;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.List;
@@ -25,7 +24,10 @@ public class ProdMaintServlet extends HttpServlet {
     
     // decide what to do based on action param
     String action = request.getParameter("action");
-    String url = "/index.jsp";
+    if (action == null)
+      action = "displayProducts";
+    
+    String url = "/prodList.jsp";
     switch (action)
     {
       case "displayProducts":
@@ -76,6 +78,7 @@ public class ProdMaintServlet extends HttpServlet {
         {
           ProductIO.deleteProduct(delProduct);
         }
+        
         url = "/prodList.jsp";
         break;
     }

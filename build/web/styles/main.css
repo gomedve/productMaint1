@@ -16,38 +16,51 @@ br {
 
 label {
   width: 100px;
-  height: 14px;
+  height: 18px;
   font-weight: bold;
   float: left;
   vertical-align: middle;
   display: block;
+  margin: 3px;
 }
 
 input {
   vertical-align: middle;
 }
 
-#quantity {
-  width: 2em;
-}
-.pad_top {
-  padding-top: 1em;
-}
 /* The styles for the tables */
 table {
+  border: 0px;
+}
+
+.border, table.border th, table.border td {
   border: 1px solid black;
   border-collapse: collapse;
-  width: 50em;
 }
+
 th, td {
-  border: 1px solid black;
-  text-align: left;
-  padding: .5em;
+  padding: 5px;
 }
+
+.noPad, table.noPad th, table.noPad td {
+  padding: 0px;
+}
+
 .right {
   text-align: right;
 }
 
-table.noBorder td {
-  border: 0px;
+input[type=submit] {
+  margin-top: 10px;
+  width: 115px;
+  display: inline-block;
+}
+
+input[type=text] {
+  margin: 3px;
+  vertical-align: middle;
+}
+
+form {
+  display: inline;
 }
