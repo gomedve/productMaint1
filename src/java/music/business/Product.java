@@ -81,4 +81,19 @@ public class Product implements Serializable
     {
       return "Audio CD";
     }
+    
+    <label class="pad_top">Last Name:</label>
+    <input type="text" name="code"
+           value="<%= user.getCode() %>">
+    <mma:ifEmptyMark color="blue" field="<%user.getCode() %>"/><br>
+    
+      <label class="pad_top">Last Name:</label>
+    <input type="text" name="description"
+           value="<%= user.getDescription() %>">
+    <mma:ifEmptyMark color="blue" field="<%user.getDescription() %>"/><br>
+    
+      <label class="pad_top">Last Name:</label>
+    <input type="text" name="price"
+           value="<%= user.getPrice() %>">
+    <mma:ifEmptyMark color="blue" field="<%user.getPrice() %>"/><br>
 }
