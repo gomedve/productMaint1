@@ -17,14 +17,11 @@ public class ProdMaintServlet extends HttpServlet {
   {
     // get the products and place into session var
     ServletContext sc = getServletContext();
-   // String path = sc.getRealPath("/WEB-INF/products.txt");
-   // ProductIO.init(path);
-   
-    
-    
+    // String path = sc.getRealPath("/WEB-INF/products.txt");
+    // ProductIO.init(path);
     
     HttpSession session = request.getSession();
-    session.setAttribute("products", products);
+    session.setAttribute("products", ProductDB.selectAll());
     
     // decide what to do based on action param
     String action = request.getParameter("action");
@@ -41,7 +38,7 @@ public class ProdMaintServlet extends HttpServlet {
       case "addProduct":
         // set a product into the session if indicated, otherwise clear it
         if (request.getParameter("productCode") != null) {
-          session.setAttribute("product", ProductDB(request.getParameter("productCode")));
+          session.setAttribute("product", request.getParameter("productCode"));
         } else {
           session.setAttribute("product", null);
         }
@@ -56,7 +53,7 @@ public class ProdMaintServlet extends HttpServlet {
         addProduct.setPrice(Double.parseDouble(request.getParameter("prodPrice")));
 
         // decide between update and insert
-        if (ProductDB.exists(addProduct.getCode())) {
+        if (ProductDB.codeExists(addProduct.getCode()) == false) {
           ProductDB.insert(addProduct);
         } else {
           ProductDB.update(addProduct);
