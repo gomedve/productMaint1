@@ -7,6 +7,7 @@ import java.util.List;
 
 import music.data.*;
 import music.business.*;
+import music.data.*;
 
 public class ProdMaintServlet extends HttpServlet {
 
@@ -16,9 +17,12 @@ public class ProdMaintServlet extends HttpServlet {
   {
     // get the products and place into session var
     ServletContext sc = getServletContext();
-    String path = sc.getRealPath("/WEB-INF/products.txt");
-    ProductIO.init(path);
-    List<Product> products = ProductIO.selectProducts();
+   // String path = sc.getRealPath("/WEB-INF/products.txt");
+   // ProductIO.init(path);
+   
+    
+    
+    
     HttpSession session = request.getSession();
     session.setAttribute("products", products);
     
@@ -37,7 +41,7 @@ public class ProdMaintServlet extends HttpServlet {
       case "addProduct":
         // set a product into the session if indicated, otherwise clear it
         if (request.getParameter("productCode") != null) {
-          session.setAttribute("product", ProductIO.selectProduct(request.getParameter("productCode")));
+          session.setAttribute("product", ProductDB(request.getParameter("productCode")));
         } else {
           session.setAttribute("product", null);
         }
@@ -52,10 +56,10 @@ public class ProdMaintServlet extends HttpServlet {
         addProduct.setPrice(Double.parseDouble(request.getParameter("prodPrice")));
 
         // decide between update and insert
-        if (ProductIO.exists(addProduct.getCode())) {
-          ProductIO.updateProduct(addProduct);
+        if (ProductDB.exists(addProduct.getCode())) {
+          ProductDB.insert(addProduct);
         } else {
-          ProductIO.insertProduct(addProduct);
+          ProductDB.update(addProduct);
         }
 
         url = "/prodList.jsp";
@@ -76,7 +80,7 @@ public class ProdMaintServlet extends HttpServlet {
         Product delProduct = (Product) session.getAttribute("product");
         if (delProduct != null)
         {
-          ProductIO.deleteProduct(delProduct);
+          ProductDB.delete(delProduct);
         }
         
         url = "/prodList.jsp";
