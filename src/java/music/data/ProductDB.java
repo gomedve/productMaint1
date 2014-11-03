@@ -40,20 +40,45 @@ public class ProductDB {
             System.out.println(e);
             return null;
         } finally {
-            DBUtil.closeResultSet(rs);
-            DBUtil.closePreparedStatement(ps);
+  //          DBUtil.closeResultSet(rs);
+  //          DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         
     }
    }
    
+ 
+    public static Product selectByCode(String code) {
+    ConnectionPool pool = ConnectionPool.getInstance();
+    Connection connection = pool.getConnection();
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+        String preparedQuery = "SELECT * FROM Product "
+        + "WHERE ProductCode = ?";
+    try {
+        ps = connection.prepareStatement(preparedQuery);
+        ps.setString(1, code);
+        rs = ps.executeQuery();
+        rs.next();
+        
+        Product product = new Product();
+        product.setCode(rs.getString("ProductCode"));
+        product.setDescription(rs.getString("ProductDescription"));
+        product.setPrice(rs.getDouble("ProductPrice"));
+        return product;
+            } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+        // DBUtil.closeResultSet(rs);
+        //DBUtil.closePreparedStatement(ps);
+        pool.freeConnection(connection);
+  }
+  }
+   
    public static Boolean codeExists(String code) {
-    //
-    // use emailExists example
-    //
-    // execute code to select a single product.
-    // Select * FROM Product WHERE ProductCode = ?
-    // does it return false?
+  
    ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -70,8 +95,8 @@ public class ProductDB {
             System.out.println(e);
             return false;
         } finally {
-            DBUtil.closeResultSet(rs);
-            DBUtil.closePreparedStatement(ps);
+      //      DBUtil.closeResultSet(rs);
+      //      DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
     }
@@ -98,7 +123,7 @@ public class ProductDB {
         System.out.println(e);
         return 0;
     } finally {
-        DBUtil.closePreparedStatement(ps);
+   //     DBUtil.closePreparedStatement(ps);
         pool.freeConnection(connection);
     }
 }
@@ -123,7 +148,7 @@ public class ProductDB {
         System.out.println(e);
         return 0;
     } finally {
-        DBUtil.closePreparedStatement(ps);
+   //     DBUtil.closePreparedStatement(ps);
         pool.freeConnection(connection);
     }
 }
@@ -144,7 +169,7 @@ public class ProductDB {
         System.out.println(e);
         return 0;
     } finally {
-        DBUtil.closePreparedStatement(ps);
+    //    DBUtil.closePreparedStatement(ps);
         pool.freeConnection(connection);
     }
        

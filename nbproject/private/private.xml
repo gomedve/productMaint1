@@ -6,6 +6,7 @@
             <file>file:/H:/GitHub/productMaint1/src/java/music/servlet/ProdMaintServlet.java</file>
             <file>file:/H:/GitHub/productMaint1/src/java/music/data/ProductDB.java</file>
             <file>file:/H:/GitHub/productMaint1/web/META-INF/context.xml</file>
+            <file>file:/H:/GitHub/productMaint1/src/java/music/business/Product.java</file>
             <file>file:/H:/GitHub/productMaint1/src/java/music/data/DBUtil.java</file>
             <file>file:/H:/GitHub/productMaint1/src/java/music/data/ConnectionPool.java</file>
         </group>

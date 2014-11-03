@@ -38,7 +38,7 @@ public class ProdMaintServlet extends HttpServlet {
       case "addProduct":
         // set a product into the session if indicated, otherwise clear it
         if (request.getParameter("productCode") != null) {
-          session.setAttribute("product", request.getParameter("productCode"));
+          session.setAttribute("product", ProductDB.selectByCode(request.getParameter("productCode")));
         } else {
           session.setAttribute("product", null);
         }
@@ -65,7 +65,7 @@ public class ProdMaintServlet extends HttpServlet {
       case "deleteProduct":
         // set a product into the session if indicated, otherwise clear it
         if (request.getParameter("productCode") != null) {
-          session.setAttribute("product", ProductIO.selectProduct(request.getParameter("productCode")));
+          session.setAttribute("product", ProductDB.selectByCode(request.getParameter("productCode")));
         } else {
           session.setAttribute("product", null);
         }
