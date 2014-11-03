@@ -44,3 +44,7 @@ Temporary Items
 
 # Netbeans local specific files
 nbproject/private/private.xml
+nbproject/project.properties
+nbproject/private/private.xml
+nbproject/private/private.properties
+*.class
