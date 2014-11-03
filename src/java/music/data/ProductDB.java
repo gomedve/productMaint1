@@ -6,9 +6,9 @@
 package music.data;
 
 import java.sql.*;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 import music.business.Product;
+import music.data.DBUtil;
 
 /**
  *
@@ -16,20 +16,34 @@ import music.business.Product;
  */
 public class ProductDB {
    
-   public static List<Product> selectAll()
-   {
-    //
-    // use selectUsers example
-    //
-    // execute code to select a single ALL product.
-    
-    // Select * FROM Product
-     
-    ResultSet products = ps.executeUpdate();
-    ResultSet.next();
-
-    while (products.next()) {
-     // statements that process each row
+   public static ArrayList<Product> selectAll() {
+    ConnectionPool pool = ConnectionPool.getInstance();
+    Connection connection = pool.getConnection();
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+       
+    String preparedQuery = "SELECT * FROM Product";    
+        try {
+            ps = connection.prepareStatement(preparedQuery);
+            rs = ps.executeQuery();
+            ArrayList<Product> products = new ArrayList<Product>();
+            while (rs.next())
+            {
+                Product product = new Product();
+                product.setCode(rs.getString("ProductCode"));
+                product.setDescription(rs.getString("ProductDescription"));
+                product.setPrice(rs.getDouble("ProductPrice"));
+                products.add(product);
+            }
+            return products;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        
     }
    }
    
@@ -40,7 +54,27 @@ public class ProductDB {
     // execute code to select a single product.
     // Select * FROM Product WHERE ProductCode = ?
     // does it return false?
-   }
+   ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String preparedQuery = "SELECT * FROM Product "
+                + "WHERE ProductCode = ?";
+        try {
+            ps = connection.prepareStatement(preparedQuery);
+            ps.setString(1, code);
+            rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
     
    public static int update(Product product)  {
     ConnectionPool pool = ConnectionPool.getInstance();
