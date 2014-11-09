@@ -11,8 +11,10 @@ import java.util.List;
 import music.business.Product;
 import music.data.DBUtil;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 /**
@@ -187,11 +189,17 @@ public class ProductDB {
 //  }
     // JDBC Part End
     
+     private static final EntityManagerFactory emf =
+            Persistence.createEntityManagerFactory("productPU");
+    
+   public static EntityManagerFactory getEmFactory() {
+        return emf;
+    }
        
           // JPA Part
     public static List<Product> selectAll() {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String qString = "SELECT u from Product u";
+        EntityManager em = getEmFactory().createEntityManager();
+        String qString = "SELECT p FROM Product p";
         TypedQuery<Product> q = em.createQuery(qString, Product.class);
 
         List<Product> products;
@@ -207,7 +215,7 @@ public class ProductDB {
        
     
     public static Product selectByCode(String code) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = getEmFactory().createEntityManager();
         String qString = "SELECT u FROM Product u " +
                 "WHERE u.code = :code";
         TypedQuery<Product> q = em.createQuery(qString, Product.class);
@@ -229,7 +237,7 @@ public class ProductDB {
 
   
    public static void update(Product product) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         trans.begin();       
         try {
@@ -245,7 +253,7 @@ public class ProductDB {
     
  
        public static void insert(Product product) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         trans.begin();        
         try {
@@ -261,7 +269,7 @@ public class ProductDB {
    
    
    public static void delete(Product product) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         trans.begin();        
         try {
