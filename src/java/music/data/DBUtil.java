@@ -14,13 +14,13 @@ import javax.persistence.Persistence;
  */
 public class DBUtil {
     
-     //JPA Entity Manager factory
-    private static final EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("productPU");
-    
-    public static EntityManagerFactory getEmFactory() {
-        return emf;
-    }
+   //JPA Entity Manager factory
+   private static final EntityManagerFactory emf =
+           Persistence.createEntityManagerFactory("productPU");
+
+   public static EntityManagerFactory getEmFactory() {
+       return emf;
+   }
     //
     
     

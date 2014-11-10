@@ -192,41 +192,40 @@ public class ProductDB {
        
           // JPA Part
     public static List<Product> selectAll() {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String qString = "SELECT u FROM Product u";
-        TypedQuery<Product> q = em.createQuery(qString, Product.class);
+      EntityManager em = DBUtil.getEmFactory().createEntityManager();
+      String qString = "SELECT u FROM Product u";
+      TypedQuery<Product> q = em.createQuery(qString, Product.class);
 
-        List<Product> products;
-        try {
-            products = q.getResultList();
-            if (products == null || products.isEmpty())
-                products = null;
-        } finally {
-            em.close();
-        }
-        return products;
+      List<Product> products;
+      try {
+        products = q.getResultList();
+        if (products == null || products.isEmpty())
+            products = null;
+      } finally {
+          em.close();
+      }
+      return products;
     }
        
-    
     public static Product selectByCode(String code) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String qString = "SELECT u FROM Product u " +
-                "WHERE u.code = :code";
-        TypedQuery<Product> q = em.createQuery(qString, Product.class);
-        q.setParameter("code", code);
-        try {
-            Product product = q.getSingleResult();
-            return product;
-        } catch (NoResultException e) {
-            return null;
-        } finally {
-            em.close();
-        }
+      EntityManager em = DBUtil.getEmFactory().createEntityManager();
+      String qString = "SELECT u FROM Product u " +
+              "WHERE u.code = :code";
+      TypedQuery<Product> q = em.createQuery(qString, Product.class);
+      q.setParameter("code", code);
+      try {
+        Product product = q.getSingleResult();
+        return product;
+      } catch (NoResultException e) {
+        return null;
+      } finally {
+        em.close();
+      }
     }
     
-            public static boolean codeExists(String code) {
-        Product u = selectByCode(code);   
-        return u != null;
+    public static boolean codeExists(String code) {
+      Product u = selectByCode(code);   
+      return u != null;
     }
 
   
@@ -245,7 +244,6 @@ public class ProductDB {
         }
     }     
     
- 
        public static void insert(Product product) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

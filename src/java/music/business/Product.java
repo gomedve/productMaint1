@@ -11,82 +11,82 @@ import javax.persistence.Id;
 @Entity
 public class Product implements Serializable
 {
-    private Long productId;    
-    private String code;
-    private String description;
-    private double price;
+  private Long productId;    
+  private String code;
+  private String description;
+  private double price;
 
- 
-     @Id
-    @Column(name="PRODUCTID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long getId()
-    {
-      return productId;
-    }
 
-    public void setId(Long productId)
-    {
-      this.productId = productId;
-    }
+  @Id
+  @Column(name="PRODUCTID")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public Long getId()
+  {
+    return productId;
+  }
 
-    public void setCode(String code)
-    {
-      this.code = code;
-    }
+  public void setId(Long productId)
+  {
+    this.productId = productId;
+  }
 
-    public String getCode()
-    {
-      return code;
-    }
+  public void setCode(String code)
+  {
+    this.code = code;
+  }
 
-    public void setDescription(String description)
-    {
-      this.description = description;
-    }
+  public String getCode()
+  {
+    return code;
+  }
 
-    public String getDescription()
-    {
-      return description;
-    }
+  public void setDescription(String description)
+  {
+    this.description = description;
+  }
 
-    public String getArtistName()
-    {
-      String artistName = description.substring(0, description.indexOf(" - "));
-      return artistName;
-    }
+  public String getDescription()
+  {
+    return description;
+  }
 
-    public String getAlbumName()
-    {
-      String albumName = description.substring(description.indexOf(" - ") + 3);
-      return albumName;
-    }
+  public String getArtistName()
+  {
+    String artistName = description.substring(0, description.indexOf(" - "));
+    return artistName;
+  }
 
-    public void setPrice(double price)
-    {
-      this.price = price;
-    }
+  public String getAlbumName()
+  {
+    String albumName = description.substring(description.indexOf(" - ") + 3);
+    return albumName;
+  }
 
-    public double getPrice()
-    {
-      return price;
-    }
+  public void setPrice(double price)
+  {
+    this.price = price;
+  }
 
- 
-    public String getPriceCurrencyFormat()
-    {
-      NumberFormat currency = NumberFormat.getCurrencyInstance();
-      return currency.format(price);
-    }
+  public double getPrice()
+  {
+    return price;
+  }
 
-    public String getImageURL()
-    {
-      String imageURL = "/musicStore/images/" + code + "_cover.jpg";
-      return imageURL;
-    }
 
-    public String getProductType()
-    {
-      return "Audio CD";
-    }
+  public String getPriceCurrencyFormat()
+  {
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
+    return currency.format(price);
+  }
+
+  public String getImageURL()
+  {
+    String imageURL = "/musicStore/images/" + code + "_cover.jpg";
+    return imageURL;
+  }
+
+  public String getProductType()
+  {
+    return "Audio CD";
+  }
 }
