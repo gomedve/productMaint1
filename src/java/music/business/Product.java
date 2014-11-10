@@ -2,6 +2,7 @@ package music.business;
 
 import java.text.NumberFormat;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class Product implements Serializable
 
  
      @Id
+    @Column(name="PRODUCTID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId()
     {
